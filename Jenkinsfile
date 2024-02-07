@@ -18,16 +18,16 @@ pipeline {
                  echo 'SSH Success...!!'
                  
                  stage('Using Command Docker Bulid && Tag') {
-                        
+                        pwd()
                         //sshCommand remote: remote, command: "pwd"
                         //sshCommand remote: remote, command: "whoami"
-                        sshCommand remote: remote, command: "git clone https://github.com/patiwat13/patiwat13.git"
+                      //  sshCommand remote: remote, command: "git clone https://github.com/patiwat13/patiwat13.git"
                         //sshPut remote: remote, from: 'Dockerfile', into: 'root'
-                        sshCommand remote: remote, command: 'docker build -t nginx-docker-jenkins patiwat13/.'
+                      //  sshCommand remote: remote, command: 'docker build -t nginx-docker-jenkins patiwat13/.'
                         //sshCommand remote: remote, command: 'rm -rf  nginx-say/'
                         //sshCommand remote: remote, command: 'docker image list'
-                        sshCommand remote: remote, command: 'docker tag nginx-docker-jenkins liquid07/nginx-docker-demo:jenkins-nginx'
-                        sshCommand remote: remote, command: 'docker image list'                        
+                      //  sshCommand remote: remote, command: 'docker tag nginx-docker-jenkins liquid07/nginx-docker-demo:jenkins-nginx'
+                      //  sshCommand remote: remote, command: 'docker image list'                        
                         //sshCommand remote: remote, command: 'ls -la'
                         //sshRemove remote: remote, path: "Dockerfile"
                
