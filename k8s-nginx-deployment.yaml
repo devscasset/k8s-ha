@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: liquid07/website-php:website-php-demo
+          image: liquid07/website-php:nginx-gitlab
           ports:
             - containerPort: 80
           env:
