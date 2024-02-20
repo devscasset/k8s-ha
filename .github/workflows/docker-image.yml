@@ -45,7 +45,7 @@ jobs:
          token: ${{ secrets.G_TOKEN }}
 
       - name: Edit Files
-        run: sed -i "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}g" k8s-nginx-deployment.yaml k8s-nginx-deployment.yaml
+        run: sed -i "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml k8s-nginx-deployment.yaml
 
       - name: Display Deploy
         run: cat k8s-nginx-deployment.yaml
