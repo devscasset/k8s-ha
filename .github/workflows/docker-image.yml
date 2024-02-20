@@ -32,11 +32,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build images and push to Docker Hub and Github container Registry
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
+        id: build-and-push
         with:
-          context: .
+          context: ./
+          push: true
           tags: |
-            push: true
             liquid07/k8s-ha:${{ github.sha }}
             ghcr.io/liquid07/k8s-ha:${{ github.sha }}
             
