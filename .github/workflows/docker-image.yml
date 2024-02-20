@@ -64,5 +64,6 @@ jobs:
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
           git add k8s-nginx-deployment.yaml
           git commit --amend -m "Update Images"
+          git push -f origin main
       - run: echo ${{ github }}
       - run: git push -f origin main
