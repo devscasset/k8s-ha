@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: ${{ github.actor }}/k8s-ha
+          repository: ${{ github.actor }}/k8s-argocd
           ref: 'main'
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,6 +64,6 @@ jobs:
           echo ${{ github.sha }}
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
           git add -A
-          git commit --amend -m "Update Images"
-          git push -f origin main
+          git commit -am "Update Images"
       - run: echo ${{ github }}
+      - run: git push origin main
