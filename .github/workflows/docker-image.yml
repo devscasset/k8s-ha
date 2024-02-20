@@ -39,6 +39,11 @@ jobs:
     needs: ['build-and-push-docker-image']
 
     steps:
+      - uses: actions/checkout@v3
+        with:
+         repository: ${{ github.actor }}/k8s-ha
+         token: ${{ secrets.G_TOKEN }}
+
       - name: Edit Files
         run: sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
 
