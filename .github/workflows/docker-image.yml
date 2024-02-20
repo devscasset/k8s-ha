@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          tags: /
+          tags: |
             liquid07/k8s-ha:${{ github.sha }}
             ghcr.io/liquid07/k8s-ha:${{ github.sha }}
           push: ${{ github.ref == 'refs/head/main' }}
@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: set git config
-        run: /
+        run: |
           git config --global user.email "pop.haza@gmail.com"
           git config --global user.name "patiwat13"
           echo ${{ github.sha }}
