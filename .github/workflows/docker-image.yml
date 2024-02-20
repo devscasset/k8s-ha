@@ -63,7 +63,7 @@ jobs:
           git checkout -b ci/cd
           echo ${{ github.sha }}
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
-          git add -a
+          git add -A
           git commit -am "Update Images - ${{ github.sha }}"
       - run: echo ${{ github }}
       - run: git push origin main
