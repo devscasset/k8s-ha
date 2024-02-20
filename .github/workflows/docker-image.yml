@@ -60,5 +60,8 @@ jobs:
           git commit -am "Update Images - ${{ github.sha }}"
           git push
 
+      - name: Early Exit
+        run: foo
+
       
         
