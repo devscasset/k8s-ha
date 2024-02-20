@@ -3,10 +3,11 @@ name: Docker Build Deploy
 on:
   push:
     branches: ['main']
+  workflow_dispatch:
 
 jobs:
   build-and-push-docker-image:
-    name: Build Docker image and push to repositories
+    name: Build Docker Image and Push to Repositories
     runs-on: ubuntu-latest
 
     steps:
@@ -58,4 +59,6 @@ jobs:
           git add -A
           git commit -am "Update Images - ${{ github.sha }}"
           git push
+
+      
         
