@@ -37,7 +37,7 @@ jobs:
           context: ./
           tags: /
             liquid07/k8s-ha:${{ github.sha }}
-            ghct.io/liquid07/k8s-ha:${{ github.sha }}
+            ghcr.io/liquid07/k8s-ha:${{ github.sha }}
           push: ${{ github.ref == 'refs/head/main' }}
 
       - name: Image digest
