@@ -61,7 +61,7 @@ jobs:
           git config --global user.email "pop.haza@gmail.com"
           git config --global user.name "patiwat13"
           echo ${{ github.sha }}
-          sed -e "liquid07/k8s-ha:${{ github.sha }}" k8s-nginx-deployment.yaml
+          sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
           git add -A
           git commit -am "Update image fot - ${{ github.sha }}"
       - run: echo ${{ github }}
