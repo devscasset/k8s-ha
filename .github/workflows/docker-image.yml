@@ -66,4 +66,4 @@ jobs:
           git commit -am "Update image - ${{ github.sha }}"
       - run: 
       - run: echo ${{ github }}
-      - run: git push --all
+      - run: git push 
