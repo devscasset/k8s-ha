@@ -30,4 +30,36 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build images and push to Docker Hub and Github container Registry
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          tags: /
+            liquid07/k8s-ha:${{ github.sha }}
+            ghct.io/liquid07/k8s-ha:${{ github.sha }}
+          push: ${{ github.ref == 'refs/head/main' }}
 
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  update-manifest-stage:
+    runs-on: ubuntu-lastest
+    needs: ['build-and-push-docker-image']
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: liquid07/k8s-ha
+          ref: 'main'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: set git config
+        run: /
+          git config --global user.email "pop.haza@gmail.com"
+          git config --global user.name "patiwat13"
+          echo ${{ github.sha }}
+          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment,yaml
+          git add -A
+          git commit -am "Update image fot - ${{ github.sha }}"
+      - run: echo ${{ github }}
+      - run: git push origin main
