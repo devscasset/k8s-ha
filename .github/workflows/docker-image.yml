@@ -19,8 +19,8 @@ jobs:
           echo $PRODUCT_REPO_NAME
       - name: Docker login
         run: |
-          docker login hub.docker.com -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker login hub.docker.com -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build user service docker image
-        run: docker build . --file Dockerfile -t "$DOCKER_USERNAME/$PRODUCT_REPO_NAME:latest"
+        run: docker build . --file Dockerfile -t "${{secrets.DOCKER_USERNAME}}/${{secrets.PRODUCT_REPO_NAME}}:latest"
       - name: Push user service docker image
-        run: docker push "$DOCKER_USERNAME/$PRODUCT_REPO_NAME:latest"
+        run: docker push "${{secrets.DOCKER_USERNAME}}/${{secrets.PRODUCT_REPO_NAME}}:latest"
