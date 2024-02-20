@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: liquid07/nginx-docker-demo:nginx-gitlab
+          image: liquid07/k8s:'abcdefg'
           ports:
             - containerPort: 80
           env:
