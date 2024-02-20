@@ -58,10 +58,10 @@ jobs:
           git config user.name "patiwat13"
           git add -A
           git commit -am "Update Images - ${{ github.sha }}"
-          git push
+          git push origin main
 
       - name: Early Exit
-        run: foo
+        run: echo ${{ github }}
 
       
         
