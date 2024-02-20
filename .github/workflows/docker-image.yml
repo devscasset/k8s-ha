@@ -57,9 +57,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: set git config
-        run: /
+        run: |
           git config --global user.email "patiwat.srisutham@gmail.com"
           git config --global user.name "patiwat13"
+          git checkout -b ci/cd
           echo ${{ github.sha }}
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
           git add -a
