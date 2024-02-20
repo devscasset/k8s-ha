@@ -36,7 +36,6 @@ jobs:
         with:
           context: .
           tags: |
-            file: ./Dockerfile
             push: true
             liquid07/k8s-ha:${{ github.sha }}
             ghcr.io/liquid07/k8s-ha:${{ github.sha }}
