@@ -60,10 +60,10 @@ jobs:
         run: |
           git config --global user.email "patiwat.srisutham@gmail.com"
           git config --global user.name "patiwat13"
-          git remote add origin ${{ github.actor }}/k8s-ha
           echo ${{ github.sha }}
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
           git add -A
-      - run: git commit -am "Update image - ${{ github.sha }}"
+          git commit -am "Update image - ${{ github.sha }}"
+      - run: 
       - run: echo ${{ github }}
-      - run: git push origin main
+      - run: git push --all
