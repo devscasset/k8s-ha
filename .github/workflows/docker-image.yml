@@ -65,4 +65,3 @@ jobs:
           git add -A
           git commit --amend -m "Update Images"
       - run: echo ${{ github }}
-      - run: git push origin main
