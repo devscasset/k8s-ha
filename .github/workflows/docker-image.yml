@@ -40,7 +40,6 @@ jobs:
           push: true
           tags: |
             liquid07/k8s-ha:${{ github.sha }}
-            ghcr.io/patiwat13/k8s-ha:${{ github.sha }}
             
           
       - name: Image digest
