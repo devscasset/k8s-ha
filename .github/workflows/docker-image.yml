@@ -65,5 +65,4 @@ jobs:
           git add -A
           git commit -am "Update image - ${{ github.sha }}"
           git push origin main
-      - run: 
       - run: echo ${{ github }}
