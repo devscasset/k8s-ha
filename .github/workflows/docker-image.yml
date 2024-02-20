@@ -62,6 +62,7 @@ jobs:
           git config --global user.name "patiwat13"
           echo ${{ github.sha }}
           sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
-          git add -A
+          git add .
+          git commit -am "Update Images for - ${{ github.sha }}"
       - run: echo ${{ github }}
       - run: git push origin main
