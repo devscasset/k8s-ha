@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: liquid07/k8s-ha
+          repository: ${{ github.actor }}/k8s-ha
           ref: 'main'
           token: ${{ secrets.GITHUB_TOKEN }}
 
