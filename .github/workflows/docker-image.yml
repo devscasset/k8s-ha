@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
 
       - name: Set up Docker Buildx
@@ -25,14 +25,7 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
 
-      - name: Login to Github Package
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.G_TOKEN }}
-      
-      - name: Build images and push to Docker Hub and Github container Registry
+      - name: Build images and push to Docker Hub
         uses: docker/build-push-action@v4
         id: build-and-push
         with:
@@ -40,29 +33,24 @@ jobs:
           push: true
           tags: |
             liquid07/k8s-ha:${{ github.sha }}
-            
-          
-      - name: Image digest
-        run: |
-          echo liquid07/k8s-ha:${{ github.sha }}
 
-  update-manifest-stage:
+  Update-Manifest-Stage:
     runs-on: ubuntu-latest
     needs: ['build-and-push-docker-image']
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: ${{ github.actor }}/k8s-argocd
-          ref: 'main'
-          token: ${{ secrets.G_TOKEN }}
 
-      - name: set git config
+    steps:
+      - name: Edit Files
+        run: sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
+
+      - name: Display Deploy
+        run: cat k8s-nginx-deployment.yaml
+  
+
+      - name: Push Change
         run: |
-          git config --global user.email "patiwat.srisutham@gmail.com"
-          git config --global user.name "patiwat13"
-          echo ${{ github.sha }}
-          sed -e "s#liquid07.*#liquid07/k8s-ha:${{ github.sha }}#g" k8s-nginx-deployment.yaml
+          git config user.email "patiwat.srisutham@gmail.com"
+          git config user.name "patiwat13"
           git add -A
-          git commit --amend -m "Update Images"
-          git push -f origin main
-      - run: echo ${{ github }}
+          git commit -am "Update Images - ${{ github.sha }}"
+          git push
+        
